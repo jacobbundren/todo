@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
     Dimensions,
     Text,
-    View
+    View,
+    StyleSheet
 } from 'react-native';
 
 class TodoItem extends Component {
@@ -28,7 +29,7 @@ TodoItem.propTypes = {
 
 const { height, width } = Dimensions.get('window');
 
-const styles = {
+const styles = StyleSheet.create({
     container: {
         height: height * .08,
         width: width,
@@ -36,6 +37,6 @@ const styles = {
         borderColor: 'black',
         borderWidth: '1px'
     }
-}
+});
 
 export default TodoItem;

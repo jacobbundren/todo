@@ -1,22 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import TodoItem from "./components/todo-item";
+import Home from "./components/home";
+import React, { Component } from 'react';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <TodoItem title={"Hello"} />
-      <TodoItem title={"Goodbye"} />
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends React.Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <Home/>
+                <StatusBar style="auto"/>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#DDD',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
+export default App;
