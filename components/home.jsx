@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
     Dimensions,
-    Text,
     View,
     StyleSheet
 } from 'react-native';
 import TodoItem from "./todo-item";
 import StorageService from "../services/storageService";
+import {Text} from "@rneui/base";
 
 const storageService = new StorageService();
 
@@ -19,26 +18,33 @@ class Home extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         storageService.readFromStorage().then(items => {
             this.setState(prevState => ({
-                todoItems: [...prevState.todoItems, items]
+                todoItems: [...prevState.todoItems, ...JSON.parse(items)]
             }));
         })
     }
 
     render() {
         let items = this.state.todoItems;
-        console.log('renders', items);
         let renderedItems = []
-        items.push((val) => {
-            renderedItems.push(<TodoItem title={val} />)
+        items.forEach((val, key) => {
+            renderedItems.push(<TodoItem title={val} key={key} />)
         })
         return (
-            <View style={styles.container}>
-                {
-                    renderedItems
-                }
+            <View>
+                <View style={styles.appTitleContainer}>
+                    <Text style={styles.appTitle}>List</Text>
+                </View>
+                <View style={styles.listContainer}>
+                    {
+                        renderedItems
+                    }
+                </View>
+                <View style={styles.footerContainer}>
+                    <Text>Footer</Text>
+                </View>
             </View>
         )
     }
@@ -46,11 +52,22 @@ class Home extends Component {
 
 const { height, width } = Dimensions.get('window');
 
-const styles = {
-    container: {
-        height: height,
-        width: width
+const styles = StyleSheet.create({
+    appTitleContainer: {
+        height: height * .11,
+        width: width,
+        display: 'flex',
+        flexDirection: 'column-reverse',
+        alignItems: 'center'
+
+    },
+    appTitle: {
+        fontSize: 48,
+        color: 'black',
+    },
+    listContainer: {
     }
-}
+});
+
 
 export default Home;

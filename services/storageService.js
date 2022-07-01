@@ -2,7 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class StorageService {
     constructor() {
-        this.addToStorage('Item #1')
+        this.items = ['Finish Laundry', 'Pick Up Groceries', 'Walk Dog', 'Mow Lawn'];
+        this.addToStorage(JSON.stringify(this.items));
     }
 
     async readFromStorage() {
